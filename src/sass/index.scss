@@ -1,2 +1,28 @@
+@import './background';
+@import './chart';
 @import './common';
-@import './example';
+@import './cube';
+@import './currentDate';
+@import './favouriteList';
+@import './five-days';
+@import './loader';
+@import './searchForm';
+@import './variables';
+@import './weather';
+
+.search-form {
+  display: flex;
+  justify-content: center;
+}
+
+.search-form input {
+  margin-top: 30px;
+}
+
+.hidden {
+  display: none;
+}
+
+body {
+  overflow-y: auto;
+}
