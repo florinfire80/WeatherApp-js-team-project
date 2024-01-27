@@ -1,4 +1,5 @@
 'use strict';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import {
   formatDate,
   getDayOfWeek,
@@ -12,6 +13,7 @@ import {
   cloudsAndSunSvg,
   cloudySvg,
 } from './utilsForFiveDays.js';
+
 let selectedDay;
 const moreInfoCards = document.querySelector('.more-info-container');
 const cardsList = document.querySelector('.days-cards');
@@ -19,7 +21,7 @@ const sectionTitle = document.querySelector('.five-days-section__title');
 const moreInfoContainer = document.querySelector('.more-info-container');
 const fiveDaysSectionContainer = document.querySelector('.five-days-section');
 
-const APIKEY = '072ec51636e5141423703ba32d12100f';
+const APIKEY = '6216a81b549dd86d0e4b82bf256e85c0';
 const urlForFiveDaysWeather = (lat, lon) => {
   return `https://api.openweathermap.org/data/2.5/forecast/?lat=${lat}&lon=${lon}&appid=${APIKEY}&units=metric&lang=en`;
 };
@@ -127,7 +129,6 @@ cardsList.addEventListener('click', event => {
     }
   }
 });
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const searchForm = document.querySelector('#search-form');
 const searchInput = document.querySelector('#search-input');

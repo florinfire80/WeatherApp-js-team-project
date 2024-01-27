@@ -1,5 +1,5 @@
 async function getWeatherData() {
-  const API_KEY = '072ec51636e5141423703ba32d12100f';
+  const API_KEY = '6216a81b549dd86d0e4b82bf256e85c0';
   const city = 'Bucharest';
 
   //Utilizare temperatura
@@ -37,7 +37,7 @@ async function getWeatherData() {
 //Utilizare umiditate
 
 async function getHumidityData() {
-  const API_KEY = '072ec51636e5141423703ba32d12100f';
+  const API_KEY = '6216a81b549dd86d0e4b82bf256e85c0';
   const city = 'Bucharest';
 
   try {
@@ -70,7 +70,7 @@ async function getHumidityData() {
 //Utilizare viteza vantului
 
 async function getWindData() {
-  const API_KEY = '072ec51636e5141423703ba32d12100f';
+  const API_KEY = '6216a81b549dd86d0e4b82bf256e85c0';
   const city = 'Bucharest';
 
   try {
@@ -103,7 +103,7 @@ async function getWindData() {
 //Utilizare atmosferei
 
 async function getAtmosphereData() {
-  const API_KEY = '072ec51636e5141423703ba32d12100f';
+  const API_KEY = '6216a81b549dd86d0e4b82bf256e85c0';
   const city = 'Bucharest';
 
   try {

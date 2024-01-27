@@ -1,5 +1,5 @@
 'use strict';
-const APIKEY = '072ec51636e5141423703ba32d12100f';
+const APIKEY = '6216a81b549dd86d0e4b82bf256e85c0';
 
 const urlForCoordinates = city => {
   return `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${APIKEY}`;
@@ -69,63 +69,39 @@ function decodeTime(time) {
 }
 
 function updateClock() {
-  const clock = document.querySelector('.time__hour');
-  clock.textContent = getCurrentTime();
+  return new Promise(resolve => {
+    document.querySelector('.time__hour').textContent = getCurrentTime();
+    resolve();
+  });
+}
+
+function getCurrentTime() {
+  const currentTime = new Date();
+  const formattedHour = String(currentTime.getHours()).padStart(2, '0');
+  const formattedMin = String(currentTime.getMinutes()).padStart(2, '0');
+  const formattedSec = String(currentTime.getSeconds()).padStart(2, '0');
+  return `${formattedHour}:${formattedMin}:${formattedSec}`;
 }
 
 // Funcția care afla ora corespunzătoare fusului orar al orașului căutat
 function updateClockWithTimeZone(data) {
-  const currentTime = new Date();
-  let localTimeToGMT = data.locationTimezone / 3600;
-  let searchedCityToGMT = data.timezone / 3600;
-  let hours = currentTime.getHours();
-  let timeDifference = 0;
-  if (localTimeToGMT > searchedCityToGMT) {
-    if (localTimeToGMT >= 0) {
-      if (searchedCityToGMT >= 0) {
-        timeDifference = (localTimeToGMT - searchedCityToGMT) * -1;
-      } else if (searchedCityToGMT < 0) {
-        searchedCityToGMT *= -1;
-        timeDifference = (localTimeToGMT + searchedCityToGMT) * -1;
-      }
-    } else if (localTimeToGMT < 0) {
-      if (searchedCityToGMT < 0) {
-        searchedCityToGMT *= -1;
-        localTimeToGMT *= -1;
-        timeDifference = (localTimeToGMT - searchedCityToGMT) * -1;
-      }
-    }
-  } else if (searchedCityToGMT > localTimeToGMT) {
-    if (localTimeToGMT >= 0) {
-      timeDifference = searchedCityToGMT - localTimeToGMT;
-    } else if (localTimeToGMT < 0) {
-      localTimeToGMT *= -1;
-      timeDifference = searchedCityToGMT + localTimeToGMT;
-    }
-  }
+  return new Promise(resolve => {
+    const currentTime = new Date();
+    const localOffset = currentTime.getTimezoneOffset() / 60;
+    const timeDifference = (localOffset + data.locationTimezone / 3600) * 60;
 
-  if (timeDifference >= 0) {
-    if (hours + timeDifference >= 24) {
-      hours = timeDifference - (24 - hours);
-    } else {
-      hours += timeDifference;
-    }
-  } else if (timeDifference < 0) {
-    if (hours + timeDifference < 0) {
-      timeDifference *= -1;
-      hours = 24 - (timeDifference - hours);
-    } else {
-      timeDifference *= -1;
-      hours -= timeDifference;
-    }
-  }
-  const formattedHour = String(hours).padStart(2, '0');
-  const formattedMin = String(currentTime.getMinutes()).padStart(2, '0');
-  const formattedSec = String(currentTime.getSeconds()).padStart(2, '0');
+    currentTime.setMinutes(currentTime.getMinutes() + timeDifference);
 
-  // Actualizăm elementul HTML care afișează ora curentă
-  const clockElement = document.querySelector('.time__hour');
-  clockElement.textContent = `${formattedHour}:${formattedMin}:${formattedSec}`;
+    const formattedHour = String(currentTime.getHours()).padStart(2, '0');
+    const formattedMin = String(currentTime.getMinutes()).padStart(2, '0');
+    const formattedSec = String(currentTime.getSeconds()).padStart(2, '0');
+
+    // Update the HTML element displaying the current time
+    const clockElement = document.querySelector('.time__hour');
+    clockElement.textContent = `${formattedHour}:${formattedMin}:${formattedSec}`;
+
+    resolve();
+  });
 }
 
 const typeOfWeather = {

@@ -59,7 +59,7 @@ favouritesList.addEventListener('click', event => {
 function loadFromLocalStorage() {
   const data = localStorage.getItem('savedCities');
   const parsedData = JSON.parse(data);
-  console.log(parsedData);
+  // console.log(parsedData);
   if (parsedData) {
     const markup = parsedData
       .map(item => {
