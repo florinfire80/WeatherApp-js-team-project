@@ -6,7 +6,7 @@ const btnContainer = document.querySelector('.buttons');
 
 const todayWeatherContainer = document.querySelector('.weather-container');
 const todayDateContainer = document.querySelector('.date-quote-container');
-const fiveDaySecion = document.querySelector('.five-days-section');
+const fiveDaySection = document.querySelector('.five-days-section');
 
 todayBtn.addEventListener('click', showTodayData);
 fiveDaysBtn.addEventListener('click', showFiveDayData);
@@ -17,7 +17,7 @@ function showTodayData() {
     fiveDaysBtn.classList.remove('buttons__active');
     todayWeatherContainer.classList.remove('hidden');
     todayDateContainer.classList.remove('hidden');
-    fiveDaySecion.classList.add('hidden');
+    fiveDaySection.classList.add('hidden');
     btnContainer.style.marginTop = '0px';
   }
 }
@@ -26,7 +26,7 @@ function showFiveDayData() {
   if (!fiveDaysBtn.classList.contains('buttons__active')) {
     fiveDaysBtn.classList.add('buttons__active');
     todayBtn.classList.remove('buttons__active');
-    fiveDaySecion.classList.remove('hidden');
+    fiveDaySection.classList.remove('hidden');
     todayWeatherContainer.classList.add('hidden');
     todayDateContainer.classList.add('hidden');
 

@@ -33,7 +33,7 @@
   align-self: baseline;
   padding-left: 21px;
   transition: all 1s ease-in-out;
-}
+ }
 
 .card {
   width: 65px;
@@ -50,6 +50,8 @@
     border-radius: 25px;
   }
 
+  
+  
   &__name {
     color: $main-text-color;
     text-align: center;

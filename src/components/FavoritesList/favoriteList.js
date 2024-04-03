@@ -6,7 +6,7 @@ const searchCity = document.querySelector('#search-input');
 const favouritesList = document.querySelector('.favourites-list');
 const nextButton = document.querySelector('.favourite-next');
 const prevButton = document.querySelector('.favourite-prev');
-const favouritesListItem = document.querySelector('.favourites-list__item');
+// const favouritesListItem = document.querySelector('.favourites-list__item');
 let savedCities = JSON.parse(localStorage.getItem('savedCities')) || [];
 
 loadFromLocalStorage();
@@ -59,7 +59,7 @@ favouritesList.addEventListener('click', event => {
 function loadFromLocalStorage() {
   const data = localStorage.getItem('savedCities');
   const parsedData = JSON.parse(data);
-  // console.log(parsedData);
+  console.log(parsedData);
   if (parsedData) {
     const markup = parsedData
       .map(item => {

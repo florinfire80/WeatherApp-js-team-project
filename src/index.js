@@ -1,11 +1,7 @@
 import { gsap } from 'gsap';
-import './js/background'; //
-import './js/buttons';
-import './js/chart';
-import './js/FavoriteList/favoriteList'; //
-import './js/FavoriteList/mobile-carousel';
-import './js/WeatherData/five-days';
-import './js/Quotes/quotes'; //
+import './components/Quotes/quotes';
+import './components/Background/background';
+import './components/FavoritesList/favoriteList';
 
 function animateSquares() {
   const cubeFirst = document.querySelector('.cube-first');

@@ -1,35 +1,33 @@
+import axios from 'axios';
+import { weatherEndpoint } from '../config.js';
+
+function generateLabels(dataList) {
+  return dataList.slice(0, 5).map(item => {
+    const date = new Date(item.dt * 1000);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    return `${day}/${month}/${year} ${hours}:${
+      minutes < 10 ? '0' : ''
+    }${minutes}`;
+  });
+}
+
 async function getWeatherData() {
-  const API_KEY = '6216a81b549dd86d0e4b82bf256e85c0';
-  const city = 'Bucharest';
-
-  //Utilizare temperatura
-
   try {
-    const response = await axios.get(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`
-    );
+    const response = await axios.get(weatherEndpoint);
 
     const weatherData = response.data.list
       .slice(0, 5)
       .map(item => item.main.temp);
 
-    // selectia datelor calendaristice
-
-    const labels = response.data.list.slice(0, 5).map(item => {
-      const date = new Date(item.dt * 1000);
-      const day = date.getDate().toString().padStart(2, '0');
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
-      const year = date.getFullYear();
-      const hours = date.getHours();
-      const minutes = date.getMinutes();
-      return `${day}/${month}/${year} ${hours}:${
-        minutes < 10 ? '0' : ''
-      }${minutes}`;
-    });
+    const labels = generateLabels(response.data.list);
 
     return { weatherData, labels };
   } catch (error) {
-    console.error('Eroare la obținerea datelor meteorologice:', error);
+    console.error('Error getting weather data:', error);
     return null;
   }
 }
@@ -37,32 +35,18 @@ async function getWeatherData() {
 //Utilizare umiditate
 
 async function getHumidityData() {
-  const API_KEY = '6216a81b549dd86d0e4b82bf256e85c0';
-  const city = 'Bucharest';
-
   try {
-    const response = await axios.get(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`
-    );
+    const response = await axios.get(weatherEndpoint);
 
     const humidityData = response.data.list
       .slice(0, 5)
       .map(item => item.main.humidity);
-    const labels = response.data.list.slice(0, 5).map(item => {
-      const date = new Date(item.dt * 1000);
-      const day = date.getDate().toString().padStart(2, '0');
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
-      const year = date.getFullYear();
-      const hours = date.getHours();
-      const minutes = date.getMinutes();
-      return `${day}/${month}/${year} ${hours}:${
-        minutes < 10 ? '0' : ''
-      }${minutes}`;
-    });
+
+    const labels = generateLabels(response.data.list);
 
     return { humidityData, labels };
   } catch (error) {
-    console.error('Eroare la obținerea datelor de umiditate:', error);
+    console.error('Error getting humidity data:', error);
     return null;
   }
 }
@@ -70,32 +54,18 @@ async function getHumidityData() {
 //Utilizare viteza vantului
 
 async function getWindData() {
-  const API_KEY = '6216a81b549dd86d0e4b82bf256e85c0';
-  const city = 'Bucharest';
-
   try {
-    const response = await axios.get(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`
-    );
+    const response = await axios.get(weatherEndpoint);
 
     const windData = response.data.list
       .slice(0, 5)
       .map(item => item.wind.speed);
-    const labels = response.data.list.slice(0, 5).map(item => {
-      const date = new Date(item.dt * 1000);
-      const day = date.getDate().toString().padStart(2, '0');
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
-      const year = date.getFullYear();
-      const hours = date.getHours();
-      const minutes = date.getMinutes();
-      return `${day}/${month}/${year} ${hours}:${
-        minutes < 10 ? '0' : ''
-      }${minutes}`;
-    });
+
+    const labels = generateLabels(response.data.list);
 
     return { windData, labels };
   } catch (error) {
-    console.error('Eroare la obținerea datelor pentru viteza vantului:', error);
+    console.error('Error getting wind speed data:', error);
     return null;
   }
 }
@@ -103,36 +73,18 @@ async function getWindData() {
 //Utilizare atmosferei
 
 async function getAtmosphereData() {
-  const API_KEY = '6216a81b549dd86d0e4b82bf256e85c0';
-  const city = 'Bucharest';
-
   try {
-    const response = await axios.get(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`
-    );
+    const response = await axios.get(weatherEndpoint);
 
     const atmosphereData = response.data.list
       .slice(0, 5)
       .map(item => item.main.pressure);
 
-    const labels = response.data.list.slice(0, 5).map(item => {
-      const date = new Date(item.dt * 1000);
-      const day = date.getDate().toString().padStart(2, '0');
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
-      const year = date.getFullYear();
-      const hours = date.getHours();
-      const minutes = date.getMinutes();
-      return `${day}/${month}/${year} ${hours}:${
-        minutes < 10 ? '0' : ''
-      }${minutes}`;
-    });
+    const labels = generateLabels(response.data.list);
 
     return { atmosphereData, labels };
   } catch (error) {
-    console.error(
-      'Eroare la obținerea datelor pentru presiunea atmosferica:',
-      error
-    );
+    console.error('Error getting atmospheric pressure data:', error);
     return null;
   }
 }
@@ -264,11 +216,11 @@ toggleButton.addEventListener('click', function (event) {
   if (chartCanvas.style.display === 'none') {
     chartCanvas.style.display = 'block';
     toggleButton.innerText = 'Hide Chart';
-    localStorage.setItem('chartContainerActivated', 'true');
+    localStorage.setItem('chartContainerActivated', 'false');
   } else {
     chartCanvas.style.display = 'none';
     toggleButton.innerText = 'Show Chart';
-    localStorage.setItem('chartContainerActivated', 'false');
+    localStorage.setItem('chartContainerActivated', 'true');
   }
 });
 
